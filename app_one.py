@@ -14,11 +14,13 @@ st.write("Coding summer school day3")
 
 st.title("Tshishonga Vhulenda")
 
-st.markdown("""Ahuna na zwinwe loto chela zwezwi""")
+st.markdown("""Ahuna na zwinwe loto Tshela zwezwi""")
 
-number= st.slider("pick a number",1,100)
+st.image("my_photo.jpg", caption="This is me 👋", width=200)
 
-st.write(f"you picked {number}")
+
+
+
 
 
 
