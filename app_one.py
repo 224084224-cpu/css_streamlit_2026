@@ -8,13 +8,29 @@ Created on Wed Jan 28 09:51:29 2026
 import streamlit as st
 
 
-st.write("CSS 2026  :)")
+import streamlit as st
 
-st.write("Coding summer school day 3")
+# Page config (optional but nice)
+st.set_page_config(
+    page_title="Profile",
+    layout="centered"
+)
 
-st.title("Tshishonga Vhulenda")
+# Add vertical space
+st.markdown("<br><br><br>", unsafe_allow_html=True)
 
-st.markdown("""Ahuna na zwinwe loto Tshela zwezwi""")
+# Centered heading
+st.markdown(
+    """
+    <h1 style="text-align: center;">👋 Hello!, I'm Tshishonga Charles</h1>
+    <h3 style="text-align: center; color: gray;">
+        Welcome to my profile
+    </h3>
+    """,
+    unsafe_allow_html=True
+)
+
+
 
 
 
