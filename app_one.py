@@ -15,7 +15,7 @@ st.markdown("<br><br><br>", unsafe_allow_html=True)
 # Profile card with contact details
 st.markdown(
     """
-    <div style="
+    <"div style=
         background-color: #f9f9f9;
         padding: 40px;
         border-radius: 20px;
@@ -37,6 +37,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
 
 
 
