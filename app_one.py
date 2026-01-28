@@ -17,9 +17,12 @@ with st.container():
 
     st.divider()
 
-    st.markdown("### 📬 Contact Details")
+    st.markdown("### Tshishonga Charles")
+    st.write("**Instituition:** Vaal University Of Technology")
+    st.write("**Department:** Engineering and Technology")
     st.write("**Email:** vhulendacharles32@gmail.com")
     st.write("**Phone:** +27 66 427 4152")
+
 
 
 
