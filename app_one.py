@@ -23,12 +23,13 @@ st.markdown("<br><br><br>", unsafe_allow_html=True)
 st.markdown(
     """
     <h1 style="text-align: center;">👋 Hello!, I'm Tshishonga Charles</h1>
-    <h3 style="text-align: center; color: light blue;">
+    <h3 style="text-align: center; color:  blue;">
         Welcome to my profile
     </h3>
     """,
     unsafe_allow_html=True
 )
+
 
 
 
