@@ -16,7 +16,8 @@ st.title("Tshishonga Vhulenda")
 
 st.markdown("""Ahuna na zwinwe loto Tshela zwezwi""")
 
-st.image("my_photo.jpg", caption="This is me 👋", width=200)
+
+
 
 
 
