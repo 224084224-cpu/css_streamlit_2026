@@ -17,11 +17,12 @@ with st.container():
 
     st.divider()
 
-    st.write("**Names: **Tshishonga Charles")
+    st.write("**Names:** Tshishonga Charles")
     st.write("**Instituition:** Vaal University Of Technology")
     st.write("**Department:** Engineering and Technology")
     st.write("**Email address:** vhulendacharles32@gmail.com")
     st.write("**Phone:** +27 66 427 4152")
+
 
 
 
