@@ -13,7 +13,7 @@ st.write("")
 # Card container
 with st.container():
     st.subheader(" Hi, I'm Charles Tshishonga")
-    st.markdown(":blue[Welcome to my profile]")
+    st.markdown(":blue[Welcome to my profile🎓]")
 
     st.divider()
 
@@ -22,6 +22,7 @@ with st.container():
     st.write("**Department:** Engineering and Technology")
     st.write("**Email address:** vhulendacharles32@gmail.com")
     st.write("**Phone:** +27 66 427 4152")
+
 
 
 
