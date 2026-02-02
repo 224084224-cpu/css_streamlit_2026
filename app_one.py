@@ -11,7 +11,7 @@ st.write("")
 
 # Card container
 with tabs[1]:
-    with st.container():
+        st.container():
         st.subheader(" Hi, I'm Charles Tshishonga")
         st.markdown(":blue[Welcome to my profile🎓]")
     
@@ -32,6 +32,7 @@ with tabs[4]:
         st.subheader("Other Skills")
         st.write("Python")
         st.write("C++")
+
 
 
 
