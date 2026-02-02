@@ -12,10 +12,19 @@ st.write("")
 tabs = st.tabs(["Profile", "Education", "Contact", "Skills"])
 
 # Card container
-with tabs[0]:        
-        st.subheader(" Hi, I'm Charles Tshishonga")
-        st.markdown(":blue[Welcome to my profile🎓]")
-    
+   with tabs[0]: 
+        col1, col2 = st.columns([3, 1])  # text wider than image
+        
+            with col1:
+                st.subheader("Hi, I'm Charles Tshishonga 👋")
+                st.markdown(":blue[Welcome to my profile 🎓]")
+        
+            with col2:
+                st.image("profile.jpg", width=150)
+               
+                st.subheader(" Hi, I'm Charles Tshishonga")
+                st.markdown(":blue[Welcome to my profile🎓]")
+            
         st.divider()
 with tabs[1]:
         st.subheader("Education")
@@ -33,6 +42,7 @@ with tabs[3]:
         st.subheader("Other Skills")
         st.write("Python")
         st.write("C++")
+
 
 
 
