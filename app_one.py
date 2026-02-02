@@ -8,7 +8,6 @@ st.set_page_config(page_title="Profile", layout="centered")
 # Vertical spacing
 st.write("")
 st.write("")
-st.write("")
 
 # Card container
 with st.container():
@@ -28,8 +27,9 @@ with st.container():
     st.write("**Instagram**: @Kadosh1644")
 
     st.subheader("Other Skills")
-    st.write(" Python")
+    st.write("Python")
     st.write("C++")
+
 
 
 
