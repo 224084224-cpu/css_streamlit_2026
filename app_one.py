@@ -12,8 +12,12 @@ tabs = st.tabs(["Profile", "Education", "Contact", "Skills"])
 # ---------------- Profile Tab ----------------
 with tabs[0]:
     
-        st.subheader("Hi, I'm Charles Tshishonga 👋")
-        st.markdown(":blue[Welcome to my profile 🎓]")
+        st.write("**Name:** Charles")
+        st.write("**Surname:** Tshishonga")
+        st.write("**Gender:** Male")
+        st.write("**Race:** African")
+    
+
 
    
 
@@ -38,6 +42,7 @@ with tabs[3]:
     st.subheader("Other Skills")
     st.write("• Python 🐍")
     st.write("• C++ 💻")
+
 
 
 
