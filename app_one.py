@@ -17,13 +17,19 @@ with st.container():
 
     st.divider()
 
-    st.write("**Names:** Tshishonga Charles")
-    st.write("**Instituition:** Vaal University Of Technology")
+    st.subheader("Education")
+    st.write("**School📕:** Edison Nesengani Secondary")
+    st.write("**Instituition🏛:** Vaal University Of Technology")
     st.write("**Department:** Engineering and Technology")
-    st.write("**Email address:** vhulendacharles32@gmail.com")
-    st.write("**Contact details:** +27 66 427 4152")
 
+    st.subheader("Contact details")
+    st.write("**Email address🖨:** vhulendacharles32@gmail.com")
+    st.write("**Contact details📲:** +27 66 427 4152")
+    st.write("**Instagram**: @Kadosh1644")
 
+    st.subheader("Other Skills")
+    st.write(" Python")
+    st.write("C++")
 
 
 
