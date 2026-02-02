@@ -17,7 +17,7 @@ with tabs[0]:
 
    
 
-    st.divider()
+
 
 # ---------------- Education Tab ----------------
 with tabs[1]:
@@ -38,6 +38,7 @@ with tabs[3]:
     st.subheader("Other Skills")
     st.write("• Python 🐍")
     st.write("• C++ 💻")
+
 
 
 
