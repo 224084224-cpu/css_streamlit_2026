@@ -11,14 +11,11 @@ tabs = st.tabs(["Profile", "Education", "Contact", "Skills"])
 
 # ---------------- Profile Tab ----------------
 with tabs[0]:
-    col1, col2 = st.columns([3, 1])  # text wider than image
-
-    with col1:
+    
         st.subheader("Hi, I'm Charles Tshishonga 👋")
         st.markdown(":blue[Welcome to my profile 🎓]")
 
-    with col2:
-        st.image("profile.jpg", width=150)
+   
 
     st.divider()
 
@@ -41,6 +38,7 @@ with tabs[3]:
     st.subheader("Other Skills")
     st.write("• Python 🐍")
     st.write("• C++ 💻")
+
 
 
 
