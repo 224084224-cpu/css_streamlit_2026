@@ -9,6 +9,8 @@ st.set_page_config(page_title="Profile", layout="centered")
 # Create tabs
 tabs = st.tabs(["Profile", "Education", "Contact", "Skills"])
 
+st.header("**Welcome to my profile**")
+
 # ---------------- Profile Tab ----------------
 with tabs[0]:
     
@@ -42,6 +44,7 @@ with tabs[3]:
     st.subheader("Other Skills")
     st.write("• Python 🐍")
     st.write("• C++ 💻")
+
 
 
 
