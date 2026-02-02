@@ -30,7 +30,17 @@ with tabs[1]:
     st.write("**Department:** Engineering and Technology")
 
 # ---------------- Contact Tab ----------------
-with tabs[2]
+with tabs[2]:
+    st.subheader("Contact details")
+    st.write("**Email address 🖨:** vhulendacharles32@gmail.com")
+    st.write("**Contact 📲:** +27 66 427 4152")
+    st.write("**Instagram 📸:** @Kadosh1644")
+
+# ---------------- Skills Tab ----------------
+with tabs[3]:
+    st.subheader("Other Skills")
+    st.write("• Python 🐍")
+    st.write("• C++ 💻")
 
 
 
