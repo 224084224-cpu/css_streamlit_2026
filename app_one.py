@@ -1,61 +1,53 @@
 import streamlit as st
 import urllib.parse
+import base64
 
 st.set_page_config(page_title="Thee Best Archaar In Town", layout="centered")
 
-# ---------- CUSTOM CSS FOR STYLING ----------
+# ---------- CUSTOM CSS FOR FONTS & HEADINGS ----------
 st.markdown("""
 <style>
-/* Nice font */
 body, .stApp {
     font-family: 'Helvetica', 'Arial', sans-serif;
 }
-
-/* Blue bold headings */
 h1, h2, h3, h4 {
-    color: #1E90FF;
+    color: #1E90FF; 
     font-weight: bold;
 }
-
-/* Buttons style */
 .stButton>button {
     background-color: #1E90FF;
     color: white;
     font-weight: bold;
 }
-
-/* Make containers slightly transparent for readability */
-[data-testid="stExpander"] > div:first-child, .stImage {
-    background-color: rgba(255,255,255,0.8);
-    border-radius: 10px;
-    padding: 5px;
-}
 </style>
 """, unsafe_allow_html=True)
 
 # ---------- BACKGROUND ----------
-st.markdown(
-    """
+def set_bg(image_file):
+    with open(image_file, "rb") as f:
+        encoded = base64.b64encode(f.read()).decode()
+    st.markdown(f"""
     <style>
-    .stApp {
-        background-image: url("https://i.imgur.com/YOUR_BACKGROUND_IMAGE.jpg");
+    .stApp {{
+        background-image: url("data:image/jpg;base64,{encoded}");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-    }
+    }}
     </style>
-    """, unsafe_allow_html=True
-)
+    """, unsafe_allow_html=True)
+
+set_bg("background.jpg")  # your uploaded background file
 
 # ---------- LOGO ----------
-st.image("https://i.imgur.com/YOUR_LOGO_IMAGE.png", width=220)
+st.image("logo.jpg", width=220)  # your uploaded logo
 
 # ---------- TITLE ----------
 st.title("🥭 Thee Best Archaar In Town")
 st.subheader("Fresh • Spicy • Affordable")
 
 # ---------- ARCHAAAR IMAGE ----------
-st.image("https://i.imgur.com/YOUR_ARCHAAR_IMAGE.jpg", caption="Our Delicious Archaar")
+st.image("archaar.jpg", caption="Our Delicious Archaar")  # your uploaded archaar image
 
 # ---------- PRODUCTS ----------
 products = {
@@ -69,22 +61,16 @@ products = {
 # ---------- CUSTOMER DETAILS ----------
 st.header("Customer Details")
 customer_name = st.text_input("Your Name")
-location = st.selectbox(
-    "Delivery Area",
-    ["Vanderbijlpark", "Bedworth Park", "Other"]
-)
+location = st.selectbox("Delivery Area", ["Vanderbijlpark", "Bedworth Park", "Other"])
 
 # ---------- MENU ----------
 st.header("Menu")
 cart = []
 total = 0
-
 for item, price in products.items():
     col1, col2, col3 = st.columns([3,2,2])
-    with col1:
-        st.write(f"**{item}**")
-    with col2:
-        st.write(f"R{price}")
+    with col1: st.write(f"**{item}**")
+    with col2: st.write(f"R{price}")
     with col3:
         qty = st.number_input(f"Qty {item}", min_value=0, step=1, key=item)
         if qty > 0:
