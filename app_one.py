@@ -1,80 +1,79 @@
 import streamlit as st
+import urllib.parse
+import base64
 
-# ---------------- Page Config ----------------
-st.set_page_config(page_title="Charles | Profile", layout="centered")
+st.set_page_config(page_title="Thee Best Archaar In Town")
 
-# ---------------- Eye-catching Welcome ----------------
-st.markdown(
+# Upload background image
+bg_image = st.file_uploader("Upload Background Picture", type=["png","jpg","jpeg"])
+
+if bg_image is not None:
+    encoded = base64.b64encode(bg_image.read()).decode()
+
+    page_bg = f"""
+    <style>
+    .stApp {{
+        background-image: url("data:image/png;base64,{encoded}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }}
+    </style>
     """
-    <h1 style='text-align: center; color: #1f77b4;'>
-        👋 Welcome to My Profile
-    </h1>
-    <h4 style='text-align: center;'>
-        Charles Tshishonga | Engineering & Technology 🎓
-    </h4>
-    <hr>
-    """,
-    unsafe_allow_html=True
-)
+    st.markdown(page_bg, unsafe_allow_html=True)
 
-# ---------------- Create Tabs ----------------
-tabs = st.tabs(["Profile", "Education", "Contact", "Skills"])
+st.title("🥭 Thee Best Archaar In Town")
+st.subheader("Fresh, Spicy & Delicious Archaar!")
 
-# ================= Profile Tab =================
-with tabs[0]:
-    st.subheader("👤 Personal Information")
+st.write("Select the size you want and add it to your cart.")
 
-    col1, col2 = st.columns(2)
+# Products
+products = {
+    "90ML": 8,
+    "250ML": 18,
+    "350ML": 25,
+    "500ML": 30,
+    "1L": 50
+}
+
+# Cart
+if "cart" not in st.session_state:
+    st.session_state.cart = []
+
+st.header("Menu")
+
+for item, price in products.items():
+    col1, col2 = st.columns([3,1])
 
     with col1:
-        st.write("**Name:** Charles")
-        st.write("**Surname:** Tshishonga")
-        st.write("**Gender:** Male")
-        st.write("**Race:** African")
+        st.write(f"**{item}** - R{price}")
 
     with col2:
-        st.checkbox("Show extra info")
-        st.success("📍 South Africa")
-        st.info("🎯 Aspiring Engineer & Programmer")
+        if st.button(f"Add {item}", key=item):
+            st.session_state.cart.append((item, price))
+            st.success(f"{item} added!")
 
-# ================= Education Tab =================
-with tabs[1]:
-    st.subheader("🎓 Education")
+st.divider()
 
-    level = st.selectbox(
-        "Select education level",
-        ["High School", "University"]
-    )
+st.header("🛒 Cart")
 
-    st.write("**School 📕:** Edison Nesengani Secondary")
-    st.write("**Institution 🏛:** Vaal University Of Technology")
-    st.write("**Department:** Engineering and Technology")
+total = 0
+order_text = "Hello, I would like to order:\n"
 
-# ================= Contact Tab =================
-with tabs[2]:
-    st.subheader("📞 Contact Details")
+for item, price in st.session_state.cart:
+    st.write(f"{item} - R{price}")
+    order_text += f"- {item} (R{price})\n"
+    total += price
 
-    preferred = st.radio(
-        "Preferred contact method:",
-        ["Email", "Phone", "Instagram"]
-    )
+st.write(f"**Total: R{total}**")
 
-    st.write("📧 vhulendacharles32@gmail.com")
-    st.write("📲 +27 66 427 4152")
-    st.write("📸 @Kadosh1644")
+order_text += f"\nTotal: R{total}"
 
-# ================= Skills Tab =================
-with tabs[3]:
-    st.subheader("🛠 Skills")
+encoded_text = urllib.parse.quote(order_text)
+whatsapp_link = f"https://wa.me/27664274152?text={encoded_text}"
 
-    skills = st.multiselect(
-        "Select skills",
-        ["Python 🐍", "C++ 💻", "Data Analysis 📊", "Problem Solving 🧠"]
-    )
-
-    st.write("### Selected Skills")
-    st.write(skills)
-
+if st.button("📲 Order on WhatsApp"):
+    st.markdown(f"[Click here to place your order]({whatsapp_link})")
 
 
 
