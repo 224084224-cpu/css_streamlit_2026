@@ -54,7 +54,7 @@ def set_bg(image_file):
 set_bg("background.jpg")
 
 # ---------- LOGO ----------
-st.image("logo.png", width=220)
+st.image("logo.jpg", width=220)
 
 # ---------- TITLE ----------
 st.title(" Thee Best Archaar In Town")
