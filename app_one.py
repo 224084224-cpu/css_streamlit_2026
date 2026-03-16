@@ -34,7 +34,7 @@ st.subheader("Fresh • Spicy • Homemade")
 st.write("Order the best homemade archaar in town!")
 
 # ---------- PRODUCT IMAGE ----------
-st.image("archaar.jpg", caption="Our Delicious Archaar")
+st.image("WhatsApp Image 2026-03-16 at 14.28.08.jpeg", caption="Our Delicious Archaar")
 
 # ---------- PRODUCTS ----------
 products = {
@@ -52,7 +52,7 @@ customer_name = st.text_input("Your Name")
 
 location = st.selectbox(
     "Delivery Area",
-    ["Vereeniging", "Vanderbijlpark", "Sebokeng", "Evaton", "Other"]
+    ["Bedworth Park", "Vanderbijlpark",  "Other"]
 )
 
 st.header("Menu")
