@@ -2,14 +2,13 @@ import streamlit as st
 import urllib.parse
 import base64
 
-st.set_page_config(page_title="Thee Best Archaar In Town")
+st.set_page_config(page_title="Thee Best Archaar In Town", layout="centered")
 
-# Upload background image
+# ---------- BACKGROUND ----------
 bg_image = st.file_uploader("Upload Background Picture", type=["png","jpg","jpeg"])
 
-if bg_image is not None:
+if bg_image:
     encoded = base64.b64encode(bg_image.read()).decode()
-
     page_bg = f"""
     <style>
     .stApp {{
@@ -22,12 +21,19 @@ if bg_image is not None:
     """
     st.markdown(page_bg, unsafe_allow_html=True)
 
-st.title("🥭 Thee Best Archaar In Town")
-st.subheader("Fresh, Spicy & Delicious Archaar!")
+# ---------- LOGO ----------
+logo = st.file_uploader("Upload Business Logo", type=["png","jpg","jpeg"])
 
-st.write("Select the size you want and add it to your cart.")
+if logo:
+    st.image(logo, width=200)
 
-# Products
+# ---------- TITLE ----------
+st.title(" Thee Best Archaar In Town")
+st.subheader("Fresh • Spicy • Homemade")
+
+st.write("Place your order below and it will send directly to WhatsApp.")
+
+# ---------- PRODUCTS ----------
 products = {
     "90ML": 8,
     "250ML": 18,
@@ -36,44 +42,56 @@ products = {
     "1L": 50
 }
 
-# Cart
-if "cart" not in st.session_state:
-    st.session_state.cart = []
+# ---------- CUSTOMER INFO ----------
+customer_name = st.text_input("Your Name")
 
 st.header("Menu")
 
+cart = []
+total = 0
+
 for item, price in products.items():
-    col1, col2 = st.columns([3,1])
+
+    col1, col2, col3 = st.columns([3,2,2])
 
     with col1:
-        st.write(f"**{item}** - R{price}")
+        st.write(f"**{item}**")
 
     with col2:
-        if st.button(f"Add {item}", key=item):
-            st.session_state.cart.append((item, price))
-            st.success(f"{item} added!")
+        st.write(f"R{price}")
+
+    with col3:
+        qty = st.number_input(
+            f"Qty {item}",
+            min_value=0,
+            step=1,
+            key=item
+        )
+
+        if qty > 0:
+            cart.append((item, price, qty))
+            total += price * qty
 
 st.divider()
 
-st.header("🛒 Cart")
+st.header("🛒 Order Summary")
 
-total = 0
-order_text = "Hello, I would like to order:\n"
+order_text = f"Hello, my name is {customer_name}. I would like to order:\n\n"
 
-for item, price in st.session_state.cart:
-    st.write(f"{item} - R{price}")
-    order_text += f"- {item} (R{price})\n"
-    total += price
+for item, price, qty in cart:
+    st.write(f"{item} x{qty} = R{price*qty}")
+    order_text += f"{item} x{qty} - R{price*qty}\n"
 
-st.write(f"**Total: R{total}**")
+st.write(f"### Total: R{total}")
 
 order_text += f"\nTotal: R{total}"
 
-encoded_text = urllib.parse.quote(order_text)
-whatsapp_link = f"https://wa.me/27664274152?text={encoded_text}"
+# ---------- WHATSAPP ----------
+encoded = urllib.parse.quote(order_text)
+whatsapp_url = f"https://wa.me/27664274152?text={encoded}"
 
-if st.button("📲 Order on WhatsApp"):
-    st.markdown(f"[Click here to place your order]({whatsapp_link})")
+if st.button("📲 Send Order to WhatsApp"):
+    st.markdown(f"[Click here to send order]({whatsapp_url})")
 
 
 
