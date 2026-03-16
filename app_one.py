@@ -1,66 +1,61 @@
 import streamlit as st
 import urllib.parse
-import base64
 
 st.set_page_config(page_title="Thee Best Archaar In Town", layout="centered")
 
-# ---------- CUSTOM CSS FOR FONTS & COLORS ----------
+# ---------- CUSTOM CSS FOR STYLING ----------
 st.markdown("""
 <style>
-/* Use nice font for everything */
+/* Nice font */
 body, .stApp {
     font-family: 'Helvetica', 'Arial', sans-serif;
 }
 
 /* Blue bold headings */
 h1, h2, h3, h4 {
-    color: #1E90FF;  /* Dodger Blue */
+    color: #1E90FF;
     font-weight: bold;
 }
 
-/* Menu items styling */
+/* Buttons style */
 .stButton>button {
     background-color: #1E90FF;
     color: white;
     font-weight: bold;
 }
 
-/* Cart and order summary box */
-.css-1d391kg {  /* container style may change in Streamlit versions */
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 15px;
+/* Make containers slightly transparent for readability */
+[data-testid="stExpander"] > div:first-child, .stImage {
+    background-color: rgba(255,255,255,0.8);
     border-radius: 10px;
+    padding: 5px;
 }
 </style>
 """, unsafe_allow_html=True)
 
 # ---------- BACKGROUND ----------
-def set_bg(image_file):
-    with open(image_file, "rb") as f:
-        encoded = base64.b64encode(f.read()).decode()
-
-    page_bg = f"""
+st.markdown(
+    """
     <style>
-    .stApp {{
-        background-image: url("data:image/jpg;base64,{encoded}");
+    .stApp {
+        background-image: url("https://i.imgur.com/YOUR_BACKGROUND_IMAGE.jpg");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-    }}
+    }
     </style>
-    """
-    st.markdown(page_bg, unsafe_allow_html=True)
-
-set_bg("background.jpg")
+    """, unsafe_allow_html=True
+)
 
 # ---------- LOGO ----------
-st.image("logo.jpg", width=220)
+st.image("https://i.imgur.com/YOUR_LOGO_IMAGE.png", width=220)
 
 # ---------- TITLE ----------
-st.title(" Thee Best Archaar In Town")
+st.title("🥭 Thee Best Archaar In Town")
 st.subheader("Fresh • Spicy • Affordable")
 
-st.image("archaar.jpg", caption="Our Delicious Archaar")
+# ---------- ARCHAAAR IMAGE ----------
+st.image("https://i.imgur.com/YOUR_ARCHAAR_IMAGE.jpg", caption="Our Delicious Archaar")
 
 # ---------- PRODUCTS ----------
 products = {
@@ -76,9 +71,10 @@ st.header("Customer Details")
 customer_name = st.text_input("Your Name")
 location = st.selectbox(
     "Delivery Area",
-    [ "Vanderbijlpark", "Bedworth Park","Other"]
+    ["Vanderbijlpark", "Bedworth Park", "Other"]
 )
 
+# ---------- MENU ----------
 st.header("Menu")
 cart = []
 total = 0
@@ -128,7 +124,7 @@ st.write("⭐⭐⭐⭐⭐ 'I order every week!' - Chantel")
 # ---------- FOOTER ----------
 st.divider()
 st.write("📞 WhatsApp Orders: 066 427 4152")
-st.write("📍 Serving Bedworth Park, Vanderbjlkpark & surrounding areas")
+st.write("📍 Serving Bedworth Park, Vanderbijlpark & surrounding areas")
 
 
 
