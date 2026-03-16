@@ -76,7 +76,7 @@ st.header("Customer Details")
 customer_name = st.text_input("Your Name")
 location = st.selectbox(
     "Delivery Area",
-    ["Vereeniging", "Vanderbijlpark", "Sebokeng", "Evaton", "Other"]
+    [ "Vanderbijlpark", "Bedworth Park","Other"]
 )
 
 st.header("Menu")
