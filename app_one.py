@@ -1,7 +1,6 @@
 import streamlit as st
 import urllib.parse
 import base64
-import qrcode
 
 st.set_page_config(page_title="Thee Best Archaar In Town", layout="centered")
 
@@ -32,6 +31,9 @@ st.image("logo.png", width=220)
 st.title("🥭 Thee Best Archaar In Town")
 st.subheader("Fresh • Spicy • Homemade")
 
+st.write("Order the best homemade archaar in town!")
+
+# ---------- PRODUCT IMAGE ----------
 st.image("archaar.jpg", caption="Our Delicious Archaar")
 
 # ---------- PRODUCTS ----------
@@ -43,9 +45,15 @@ products = {
     "1L": 50
 }
 
+# ---------- CUSTOMER DETAILS ----------
 st.header("Customer Details")
 
 customer_name = st.text_input("Your Name")
+
+location = st.selectbox(
+    "Delivery Area",
+    ["Vereeniging", "Vanderbijlpark", "Sebokeng", "Evaton", "Other"]
+)
 
 st.header("Menu")
 
@@ -71,9 +79,10 @@ for item, price in products.items():
 
 st.divider()
 
+# ---------- ORDER SUMMARY ----------
 st.header("🛒 Order Summary")
 
-order_text = f"Hello, my name is {customer_name}. I would like to order:\n\n"
+order_text = f"Hello, my name is {customer_name}. I am in {location}.\n\nI would like to order:\n\n"
 
 for item, price, qty in cart:
     st.write(f"{item} x{qty} = R{price*qty}")
@@ -83,31 +92,33 @@ st.write(f"### Total: R{total}")
 
 order_text += f"\nTotal: R{total}"
 
-# ---------- WHATSAPP ----------
+# ---------- WHATSAPP ORDER ----------
 encoded = urllib.parse.quote(order_text)
 whatsapp_url = f"https://wa.me/27664274152?text={encoded}"
 
 if st.button("📲 Send Order to WhatsApp"):
-    st.markdown(f"[Click here to send order]({whatsapp_url})")
+    st.markdown(f"[Click here to send your order]({whatsapp_url})")
 
 # ---------- QR CODE ----------
 st.divider()
-st.header("📱 Scan to Order on WhatsApp")
+st.header("📱 Scan QR Code to Order")
 
-qr = qrcode.make("https://wa.me/27664274152")
+qr_url = "https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https://wa.me/27664274152"
 
-st.image(qr, caption="Scan this QR code to order on WhatsApp")
+st.image(qr_url, caption="Scan to order on WhatsApp")
 
 # ---------- REVIEWS ----------
 st.divider()
 st.header("⭐ Customer Reviews")
 
-st.write("⭐⭐⭐⭐⭐ 'Best archaar I've tasted!'")
-st.write("⭐⭐⭐⭐⭐ 'Amazing flavour!'")
-st.write("⭐⭐⭐⭐⭐ 'Definitely buying again!'")
+st.write("⭐⭐⭐⭐⭐ 'Best archaar I've tasted!' - Sarah")
+st.write("⭐⭐⭐⭐⭐ 'Perfect spice and flavour!' - Thabo")
+st.write("⭐⭐⭐⭐⭐ 'I order every week!' - Lerato")
 
+# ---------- FOOTER ----------
 st.divider()
 st.write("📞 WhatsApp Orders: 066 427 4152")
+st.write("📍 Serving Vereeniging & surrounding areas")
 
 
 
