@@ -1,17 +1,22 @@
 import streamlit as st
 import urllib.parse
-import base64
 
+# ---------- INSERT YOUR ONLINE IMAGE URLs HERE ----------
+BACKGROUND_URL = "https://i.imgur.com/YOUR_BACKGROUND_IMAGE.jpg"
+LOGO_URL       = "https://i.imgur.com/YOUR_LOGO_IMAGE.png"
+ARCHAAR_URL    = "https://i.imgur.com/YOUR_ARCHAAR_IMAGE.jpg"
+
+# ---------- PAGE CONFIG ----------
 st.set_page_config(page_title="Thee Best Archaar In Town", layout="centered")
 
-# ---------- CUSTOM CSS FOR FONTS & HEADINGS ----------
+# ---------- CUSTOM CSS ----------
 st.markdown("""
 <style>
 body, .stApp {
     font-family: 'Helvetica', 'Arial', sans-serif;
 }
 h1, h2, h3, h4 {
-    color: #1E90FF; 
+    color: #1E90FF;
     font-weight: bold;
 }
 .stButton>button {
@@ -23,31 +28,26 @@ h1, h2, h3, h4 {
 """, unsafe_allow_html=True)
 
 # ---------- BACKGROUND ----------
-def set_bg(image_file):
-    with open(image_file, "rb") as f:
-        encoded = base64.b64encode(f.read()).decode()
-    st.markdown(f"""
-    <style>
-    .stApp {{
-        background-image: url("data:image/jpg;base64,{encoded}");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-    }}
-    </style>
-    """, unsafe_allow_html=True)
-
-set_bg("background.jpg")  # your uploaded background file
+st.markdown(f"""
+<style>
+.stApp {{
+    background-image: url("{BACKGROUND_URL}");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}}
+</style>
+""", unsafe_allow_html=True)
 
 # ---------- LOGO ----------
-st.image("logo.jpg", width=220)  # your uploaded logo
+st.image(LOGO_URL, width=220)
 
 # ---------- TITLE ----------
 st.title("🥭 Thee Best Archaar In Town")
 st.subheader("Fresh • Spicy • Affordable")
 
 # ---------- ARCHAAAR IMAGE ----------
-st.image("archaar.jpg", caption="Our Delicious Archaar")  # your uploaded archaar image
+st.image(ARCHAAR_URL, caption="Our Delicious Archaar")
 
 # ---------- PRODUCTS ----------
 products = {
