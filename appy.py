@@ -5,8 +5,7 @@ from pathlib import Path
 
 st.set_page_config(
     page_title="The Best Student Hub",
-    page_icon="🎓",
-    layout="wide"
+    
 )
 
 WHATSAPP = "27664274152"
