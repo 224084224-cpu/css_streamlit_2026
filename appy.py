@@ -1,5 +1,53 @@
+
 import streamlit as st
 import urllib.parse
+from pathlib import Path
+
+st.set_page_config(
+    page_title="The Best Student Hub",
+    page_icon="🎓",
+    layout="wide"
+)
+
+WHATSAPP = "27664274152"
+
+CATEGORIES = [
+    "The Best Archaar In Town",
+    "Cables and Chargers",
+    "TB Students Storage",
+    "Research and Online Tests Assistance",
+    "Graphic Design",
+    "Engineering Drawing Equipments"
+]
+
+def photo(filename, caption=None):
+    path = Path(__file__).parent / filename
+    if path.is_file():
+        st.image(str(path), use_container_width=True)
+    else:
+        st.info("Product image coming soon")
+    if caption:
+        st.caption(caption)
+
+def order_button(label, message):
+    encoded = urllib.parse.quote(message)
+    url = f"https://wa.me/{WHATSAPP}?text={encoded}"
+    st.link_button(label, url, type="primary")
+
+st.title("🎓 The Best Student Hub")
+st.markdown("### Your Student Marketplace")
+st.write("Affordable products, student services and convenient WhatsApp enquiries.")
+
+selected = st.selectbox(
+    "Browse our services",
+    CATEGORIES,
+    index=CATEGORIES.index(
+        st.session_state.get("section", CATEGORIES[0])
+    )
+)
+
+st.session_state["section"] = selected
+
 
 section = st.session_state.get('section', CATEGORIES[0])
 st.divider()
