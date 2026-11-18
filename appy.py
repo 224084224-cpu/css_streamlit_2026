@@ -38,15 +38,60 @@ st.title("🎓 The Best Student Hub")
 st.markdown("### Your Student Marketplace")
 st.write("Affordable products, student services and convenient WhatsApp enquiries.")
 
-selected = st.selectbox(
-    "Browse our services",
-    CATEGORIES,
-    index=CATEGORIES.index(
-        st.session_state.get("section", CATEGORIES[0])
-    )
-)
 
-st.session_state["section"] = selected
+st.markdown("## Explore Our Services")
+
+colors = [
+    "#F59A23",
+    "#17BCC7",
+    "#F21E73",
+    "#7533B2",
+    "#2474D4",
+    "#159B78"
+]
+
+icons = ["🌶️", "🔌", "📦", "📚", "🎨", "📐"]
+
+for row in range(0, len(CATEGORIES), 2):
+    columns = st.columns(2, gap="large")
+
+    for j, col in enumerate(columns):
+        i = row + j
+
+        if i < len(CATEGORIES):
+            with col:
+                st.markdown(
+                    f"""
+                    <div style="
+                        background:{colors[i]};
+                        color:white;
+                        padding:30px;
+                        border-radius:15px;
+                        min-height:160px;
+                        margin-bottom:8px;
+                    ">
+                        <div style="font-size:18px;">
+                            {i+1:02d} OPTIONS
+                        </div>
+                        <h3 style="color:white;">
+                            {CATEGORIES[i]}
+                        </h3>
+                        <div style="font-size:35px;">
+                            {icons[i]}
+                        </div>
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
+
+                if st.button(
+                    f"Explore {CATEGORIES[i]}",
+                    key=f"category_{i}",
+                    use_container_width=True
+                ):
+                    st.session_state["section"] = CATEGORIES[i]
+                    st.rerun()
+
 
 
 section = st.session_state.get('section', CATEGORIES[0])
