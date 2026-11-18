@@ -1,111 +1,71 @@
+with st.form('storage_form'):
+        package=st.selectbox('Choose a package',list(packages))
+        location=st.selectbox('Preferred area',['Bedworth Park','S.E.7'])
+        name=st.text_input('Your name')
+        extra=st.text_area('Items or collection details (optional)')
+        submitted=st.form_submit_button('Prepare storage enquiry')
+    if submitted:
+        if not name.strip(): st.warning('Please enter your name.')
+        else:
+            msg=f'Hello TB Students Storage!\nName: {name}\nPackage: {package}\nPrice: R{packages[package]:.2f}\nPreferred area: {location}\nStorage period: November 2026–February 2027\nDetails: {extra or "Please advise"}\nPlease confirm availability and collection arrangements.'
+            order_button('Send storage enquiry on WhatsApp',msg)
 
-import streamlit as st
-from urllib.parse import quote
+elif section == CATEGORIES[3]:
+    st.header('📚 Research and Online Tests Assistance')
+    st.caption('Tutoring, revision, guided practice, research support and help developing your own work.')
+    rates={'ICT Skills 1 Assistance':60,'ICT Skills 1 Reassessment':70,'Advanced ICT Assistance':80,'Advanced ICT Assistance Reassessment':90,'Computing Applications Tests Assistance':100,'Computing Applications Assignments Support':250}
+    st.table([{'Service':name,'Listed price':f'R{price:.2f}'} for name,price in rates.items()]+[{'Service':'General Research Assistance','Listed price':'Request a Quote'}])
+    st.markdown('### Academic support highlights')
+    c1,c2=st.columns(2)
+    with c1: photo('ict_word.jpg','Example supplied assessment screenshot')
+    with c2: photo('ict_excel.jpg','Example supplied assessment screenshot')
+    st.caption('These are examples from supplied screenshots, not a guarantee of marks or outcomes.')
+    with st.form('academic_form'):
+        service=st.selectbox('Choose assistance',list(rates)+['General Research Assistance'])
+        module=st.text_input('Subject / module / research topic')
+        description=st.text_area('What guidance or preparation do you need?')
+        deadline=st.date_input('Preferred date',value=None)
+        submitted=st.form_submit_button('Prepare academic support enquiry')
+    if submitted:
+        if not module.strip() or not description.strip(): st.warning('Please enter the topic and your requirements.')
+        else:
+            price=f'R{rates[service]:.2f}' if service in rates else 'Quotation requested'
+            msg=f'Hello The Best Student Hub!\nService: {service}\nListed price: {price}\nSubject/topic: {module}\nAssistance requested: {description}\nPreferred date: {deadline or "Flexible"}\nPlease confirm availability.'
+            order_button('Enquire on WhatsApp',msg)
 
-st.set_page_config(
-    page_title="The Best Student Hub",
-    page_icon="🎓",
-    layout="wide"
-)
+elif section == CATEGORIES[4]:
+    st.header('🎨 Graphic Design')
+    st.markdown('### Tell us what you want to create')
+    st.caption('Enter your budget and the design you have in mind. We will confirm the quote on WhatsApp.')
+    with st.form('design_form'):
+        design=st.selectbox('Type of design',['Event Poster','Business Advertisement','Church Poster','Birthday Poster','Flyer','Logo Design','Other Custom Design'])
+        budget=st.number_input('Your budget (R)',min_value=1.0,value=100.0,step=10.0)
+        description=st.text_area('Describe the colours, text, theme, size and style')
+        deadline=st.date_input('Preferred delivery date',value=None)
+        submitted=st.form_submit_button('Prepare design enquiry')
+    if submitted:
+        if not description.strip(): st.warning('Please describe your design.')
+        else:
+            msg=f'Hello The Best Student Hub! I need a graphic design.\nDesign type: {design}\nMy budget: R{budget:.2f}\nDescription: {description}\nPreferred date: {deadline or "Flexible"}\nPlease confirm a quotation.'
+            order_button('Request design on WhatsApp',msg)
 
-PHONE = "27664274152"
-
-st.markdown("""
-<style>
-.stApp {
-    background: #0b1020;
-    color: white;
-}
-h1, h2, h3 {
-    color: #ffffff !important;
-}
-.hero {
-    padding: 65px 25px;
-    text-align: center;
-    background: linear-gradient(135deg, #172554, #581c87);
-    border-radius: 22px;
-    margin-bottom: 35px;
-}
-.hero h1 {
-    font-size: 48px;
-    font-weight: 800;
-}
-.hero p {
-    font-size: 19px;
-    color: #e2e8f0;
-}
-.service {
-    background: #1e293b;
-    padding: 24px;
-    border-radius: 16px;
-    min-height: 170px;
-    border: 1px solid #334155;
-}
-</style>
-""", unsafe_allow_html=True)
-
-st.markdown("""
-<div class="hero">
-    <h1>🎓 THE BEST STUDENT HUB</h1>
-    <p>Your Partner in Academic and Career Success</p>
-    <p>Smart Support. Professional Results.</p>
-</div>
-""", unsafe_allow_html=True)
-
-st.header("🚀 Our Services")
-
-services = [
-    ("📚", "Academic Support", "Tutoring, study guidance and research support."),
-    ("📄", "CV Writing", "Professional CVs and cover letters."),
-    ("📊", "Presentations", "Modern PowerPoint presentations."),
-    ("🎨", "Graphic Design", "Posters, flyers and creative designs."),
-    ("💻", "Excel Support", "Spreadsheets, formulas and dashboards."),
-    ("📝", "Document Formatting", "Professional reports and formatting.")
-]
-
-for start in range(0, len(services), 3):
-    cols = st.columns(3)
-    for col, (emoji, name, desc) in zip(
-        cols, services[start:start + 3]
-    ):
-        with col:
-            st.markdown(
-                f'<div class="service"><h3>{emoji} {name}</h3>'
-                f'<p>{desc}</p></div>',
-                unsafe_allow_html=True
-            )
+elif section == CATEGORIES[5]:
+    st.header('📐 Engineering Drawing Equipments')
+    st.caption('Available for purchase subject to stock confirmation. Please enquire for prices.')
+    c1,c2,c3=st.columns(3)
+    with c1: photo('drawing_set.jpg','Drawing instruments')
+    with c2: photo('drawing_pencils.jpg','Mechanical pencils')
+    with c3: photo('drawing_template.jpg','Drawing template')
+    with st.form('drawing_form'):
+        product=st.selectbox('What are you looking for?',['Drawing Boards Full Sets (New & Pre-Owned)','Drawing Equipments'])
+        condition=st.selectbox('Preferred condition',['Either','New','Pre-owned']) if product.startswith('Drawing Boards') else 'Not specified'
+        details=st.text_area('Specific item or equipment (optional)')
+        submitted=st.form_submit_button('Prepare availability enquiry')
+    if submitted:
+        msg=f'Hello The Best Student Hub! Is this available for purchase?\nProduct: {product}\nCondition: {condition}\nDetails: {details or "Please advise what is in stock"}\nPlease confirm availability and price.'
+        order_button('Check availability on WhatsApp',msg)
 
 st.divider()
-st.header("📲 Request a Service")
-
-with st.form("order_form"):
-    name = st.text_input("Your name")
-    service = st.selectbox(
-        "Choose a service",
-        [item[1] for item in services]
-    )
-    details = st.text_area("Describe what you need")
-    submitted = st.form_submit_button("Order via WhatsApp")
-
-if submitted:
-    if not name.strip() or not details.strip():
-        st.warning("Please enter your name and requirements.")
-    else:
-        message = (
-            f"Hello The Best Student Hub!\n"
-            f"My name is {name}.\n"
-            f"Service: {service}\n"
-            f"Requirements: {details}"
-        )
-        url = f"https://wa.me/{PHONE}?text={quote(message)}"
-        st.link_button("💬 Open WhatsApp", url)
-
-st.divider()
-st.header("🌟 About Us")
-st.write(
-    "The Best Student Hub helps students and job seekers "
-    "with academic guidance, professional documents, "
-    "digital skills and creative services."
-)
-
-st.caption("© 2026 The Best Student Hub. All rights reserved.")
+st.markdown('### 💬 Need help choosing?')
+order_button('Contact The Best Student Hub','Hello The Best Student Hub! I would like to enquire about your services.')
+st.caption('© 2026 The Best Student Hub · WhatsApp: +27 66 427 4152 · Enquiries are not confirmed orders or bookings.')
