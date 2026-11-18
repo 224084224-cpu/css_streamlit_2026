@@ -1,4 +1,53 @@
-with st.form('storage_form'):
+
+section = st.session_state.get('section', CATEGORIES[0])
+st.divider()
+
+if section == CATEGORIES[0]:
+    st.header('🌶️ The Best Archaar In Town')
+    a,b=st.columns([1,1.25],gap='large')
+    with a: photo('archaar.jpg','Product poster · Orders use +27 66 427 4152 only')
+    with b:
+        st.markdown('### Retail sizes')
+        retail={'90 ml':8.0,'250 ml':18.0,'350 ml':25.0,'500 ml':30.0,'1 L':50.0,'2 L':100.0}
+        bulk={'10 L':270.67,'20 L':520.40}
+        st.table([{'Size':k,'Price':f'R{v:,.2f}'} for k,v in retail.items()])
+        st.markdown('### Commercial Bulk Buy')
+        st.table([{'Size':k,'Price':f'R{v:,.2f}'} for k,v in bulk.items()])
+        tier=st.radio('Choose order type',['Retail','Commercial Bulk Buy'],horizontal=True)
+        options=retail if tier=='Retail' else bulk
+        size=st.selectbox('Choose size',list(options))
+        qty=st.number_input('Quantity',min_value=1,max_value=1000,value=1,step=1)
+        total=options[size]*qty
+        st.metric('Estimated product total',f'R{total:,.2f}')
+        order_button('Enquire / Order on WhatsApp',f'Hello The Best Student Hub! I would like to order Archaar.\nType: {tier}\nSize: {size}\nQuantity: {qty}\nProduct total: R{total:,.2f}\nPlease confirm availability, collection/delivery and payment.')
+
+elif section == CATEGORIES[1]:
+    st.header('🔌 Cables and Chargers')
+    st.caption('Select your cable. Stock and specifications will be confirmed on WhatsApp.')
+    products=[('Type C to C Cable',55,'cable_usb_c.jpg'),('USB to iPhone Cable',60,'cable_lightning.jpg'),('Type C to iPhone Cable',70,'charger.jpg')]
+    cols=st.columns(3)
+    for col,(name,price,img) in zip(cols,products):
+        with col:
+            photo(img)
+            st.subheader(name)
+            st.markdown(f'**R{price:.2f}**')
+    names={name:price for name,price,_ in products}
+    choice=st.selectbox('Choose a product',list(names))
+    qty=st.number_input('Quantity',min_value=1,max_value=1000,value=1,step=1)
+    total=names[choice]*qty
+    st.metric('Estimated product total',f'R{total:,.2f}')
+    order_button('Order on WhatsApp',f'Hello The Best Student Hub! Is this available?\nProduct: {choice}\nQuantity: {qty}\nProduct total: R{total:,.2f}\nPlease confirm stock and collection/delivery.')
+
+elif section == CATEGORIES[2]:
+    st.header('📦 TB Students Storage')
+    st.markdown('### SAFE. SECURE. AFFORDABLE.')
+    a,b=st.columns([1,1.25],gap='large')
+    with a: photo('storage_logo.png','TB Students Storage')
+    with b: photo('storage_poster.jpg','We collect · We store · We return. See current prices below.')
+    st.info('📅 Storage period: November 2026 to February 2027  |  📍 Bedworth Park and S.E.7')
+    packages={'Package 1 — 1–2 Plastics':250,'Package 2 — 1–4 Plastics':300,'Package 3 — 4–7 Plastics':400,'Package 4 — Plastics + Fridge & Microwave':500}
+    st.table([{'Package':name,'Price':f'R{price:.2f}'} for name,price in packages.items()])
+    with st.form('storage_form'):
         package=st.selectbox('Choose a package',list(packages))
         location=st.selectbox('Preferred area',['Bedworth Park','S.E.7'])
         name=st.text_input('Your name')
